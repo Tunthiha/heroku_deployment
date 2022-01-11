@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::get('/employee', 'EmployeeController@index');
+Route::get('/types','TypeController@index');
+
+Route::post('/employee/store','EmployeeController@store');
+Route::post('/type/store','TypeController@store');
+
+Route::put('/employee/update/{id}','EmployeeController@update');
+Route::delete('/employee/delete/{id}','EmployeeController@destroy');
