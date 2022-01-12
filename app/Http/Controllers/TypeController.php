@@ -87,8 +87,10 @@ class TypeController extends Controller
      * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Type::where('id', $request->id)->delete();
+        $types = Type::all();
+        return response()->json(['types'=>$types]);
     }
 }
