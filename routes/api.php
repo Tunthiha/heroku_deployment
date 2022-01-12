@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/types','TypeController@index');
-Route::put('/type/update/{id}','EmployeeController@update');
-Route::delete('/type/delete/{id}','EmployeeController@destroy');
+Route::put('/type/update/{id}','TypeController@update');
+Route::delete('/type/delete/{id}','TypeController@destroy');
 Route::post('/type/store','TypeController@store');
 
 Route::get('/employee', 'EmployeeController@index');
