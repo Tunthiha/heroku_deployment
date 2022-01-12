@@ -90,7 +90,7 @@ class TypeController extends Controller
     public function destroy(Request $request)
     {
         Type::where('id', $request->id)->delete();
-        $types = Type::all();
+    $types = Type::all();
         return response()->json(['types'=>$types]);
     }
 }

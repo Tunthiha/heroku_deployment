@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -14,7 +15,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employee = Employee::with('type')->all();
+        return response()->json(['employee'=>$employee]);
     }
 
     /**
@@ -35,7 +37,17 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => "required",
+            'type_id'=>"required"
+
+        ]);
+        Type::create([
+            'name' => $request->name,
+            'type_id'=>$request->type_id
+        ]);
+        $employee = Employee::with('type')->all();
+        return response()->json(['employee'=>$employee]);
     }
 
     /**
@@ -78,8 +90,10 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(Request $request)
     {
-        //
+        Employee::where('id', $request->id)->delete();
+        $employee = Employee::with('type')->all();
+        return response()->json(['employee'=>$employee]);
     }
 }
