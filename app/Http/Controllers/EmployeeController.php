@@ -40,8 +40,7 @@ class EmployeeController extends Controller
         //dd($request->all());
         $request->validate([
             'name' => "required",
-
-
+            'type_id'=>"required"
         ]);
         Employee::create([
             'name' => $request->name,
