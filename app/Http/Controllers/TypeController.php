@@ -44,7 +44,7 @@ class TypeController extends Controller
             'type' => $request->type
         ]);
         $types = Type::all();
-        return response()->json(['$type'=>$types]);
+        return response()->json([$types]);
     }
 
     /**
