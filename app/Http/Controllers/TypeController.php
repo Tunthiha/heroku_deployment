@@ -43,7 +43,8 @@ class TypeController extends Controller
         Type::create([
             'type' => $request->type
         ]);
-        return response()->json(['meesage'=>'create success']);
+        $types = Type::all();
+        return response()->json(['$type'=>$types]);
     }
 
     /**
