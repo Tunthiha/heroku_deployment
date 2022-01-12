@@ -15,7 +15,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee = Employee::with('type')->all();
+        $employee = Employee::with('type')->get();
         return response()->json(['employee'=>$employee]);
     }
 
@@ -37,16 +37,17 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $request->validate([
             'name' => "required",
-            'type_id'=>"required"
+
 
         ]);
-        Type::create([
+        Employee::create([
             'name' => $request->name,
             'type_id'=>$request->type_id
         ]);
-        $employee = Employee::with('type')->all();
+        $employee = Employee::with('type')->get();
         return response()->json(['employee'=>$employee]);
     }
 
@@ -93,7 +94,7 @@ class EmployeeController extends Controller
     public function destroy(Request $request)
     {
         Employee::where('id', $request->id)->delete();
-        $employee = Employee::with('type')->all();
+        $employee = Employee::with('type')->get();
         return response()->json(['employee'=>$employee]);
     }
 }
