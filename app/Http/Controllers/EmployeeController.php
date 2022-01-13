@@ -79,9 +79,19 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'name' => "required",
+            'type_id'=>"required",
+        ]);
+        $employe = Employee::where('id',$request->id);
+        $employe->update([
+        'type_id' => $request->type_id,
+        'name' => $request->name,
+        ]);
+        $employee = Employee::with('type')->get();
+        return response()->json(['employee'=>$employee]);
     }
 
     /**
@@ -95,5 +105,6 @@ class EmployeeController extends Controller
         Employee::where('id', $request->id)->delete();
         $employee = Employee::with('type')->get();
         return response()->json(['employee'=>$employee]);
+
     }
 }
