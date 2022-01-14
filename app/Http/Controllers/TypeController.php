@@ -78,7 +78,16 @@ class TypeController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $request->validate([
+            'type' => "required",
+            'id'=>"required"
+        ]);
+        $type = Type::where('id',$request->id);
+        $type->update([
+        'type' => $request->type,
+        ]);
+        $type = Type::with('type')->get();
+        return response()->json(['Type'=>$type]);
     }
 
     /**
