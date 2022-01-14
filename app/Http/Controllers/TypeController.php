@@ -86,8 +86,8 @@ class TypeController extends Controller
         $type->update([
         'type' => $request->type,
         ]);
-        $type = Type::all();
-        return response()->json(['Type'=>$type]);
+        $types = Type::all();
+        return response()->json(['types'=>$types]);
     }
 
     /**
