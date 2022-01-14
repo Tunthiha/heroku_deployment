@@ -86,7 +86,7 @@ class TypeController extends Controller
         $type->update([
         'type' => $request->type,
         ]);
-        $types = Type::where('id',$request->id);
+        $types = Type::where('id',$request->id)->get();
         return response()->json(['types'=>$types]);
     }
 
